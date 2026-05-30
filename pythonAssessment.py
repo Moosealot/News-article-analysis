@@ -11,7 +11,16 @@ def count_specific_word(text, search_word):
 
     words = re.findall(r'\b\w+\b', text)
 
-    return words.count(search_word)
+    count = 0
+    index = 0
+
+    while index < len(words):
+        if words[index] == search_word:
+            count += 1
+
+        index += 1
+
+    return count
 
 
 def identify_most_common_word(text):
@@ -36,17 +45,18 @@ def calculate_average_word_length(text):
     if len(words) == 0:
         return 0
 
-    total_characters = sum(len(word) for word in words)
+    total_characters = 0
+
+    for word in words:
+        total_characters += len(word)
 
     return total_characters / len(words)
 
 
 def count_paragraphs(text):
-    # Empty string edge case
     if not text.strip():
         return 1
 
-    # Split by empty lines
     paragraphs = re.split(r'\n\s*\n', text.strip())
 
     return len(paragraphs)
