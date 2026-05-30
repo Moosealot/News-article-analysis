@@ -15,6 +15,7 @@ def count_specific_word(text, search_word):
     index = 0
 
     while index < len(words):
+
         if words[index] == search_word:
             count += 1
 
@@ -24,6 +25,7 @@ def count_specific_word(text, search_word):
 
 
 def identify_most_common_word(text):
+
     if not text.strip():
         return None
 
@@ -37,23 +39,25 @@ def identify_most_common_word(text):
 
 
 def calculate_average_word_length(text):
+
     if not text.strip():
         return 0
 
     words = re.findall(r'\b\w+\b', text)
-
-    if len(words) == 0:
-        return 0
 
     total_characters = 0
 
     for word in words:
         total_characters += len(word)
 
-    return total_characters / len(words)
+    if len(words) > 0:
+        return total_characters / len(words)
+    else:
+        return 0
 
 
 def count_paragraphs(text):
+
     if not text.strip():
         return 1
 
@@ -63,26 +67,35 @@ def count_paragraphs(text):
 
 
 def count_sentences(text):
+
     if not text.strip():
         return 1
 
-    sentences = re.findall(r'[.!?]', text)
+    sentence_count = 0
 
-    return len(sentences)
+
+    for character in text:
+
+        # CONDITIONAL
+        if character == "." or character == "!" or character == "?":
+            sentence_count += 1
+
+    return sentence_count
 
 
 news_article = """
-Technology companies are rapidly advancing artificial intelligence solutions.
-Many startups are investing heavily in NLP technologies.
+The latest science fiction movie has been receiving massive attention from movie fans around the world.
+Many viewers praised the visual effects, action scenes, and emotional storytelling throughout the film.
 
-These innovations are transforming industries worldwide.
-Will AI replace traditional jobs? Experts continue to debate this issue!
+Critics have also shared positive reviews about the performances of the lead actors.
+Some fans believe the movie could become one of the biggest blockbuster releases of the year!
 
-Artificial intelligence is becoming more common every day.
+The director explained that the movie was inspired by classic action and adventure films from the early 2000s.
+Movie discussions on social media continue to grow every day.
 """
 
 
-search_word = "artificial"
+search_word = "movie"
 
 print("Specific word count:", count_specific_word(news_article, search_word))
 
